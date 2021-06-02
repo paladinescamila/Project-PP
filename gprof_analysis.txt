@@ -1,0 +1,425 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 50.01      0.01     0.01    81990     0.00     0.00  qrcodegen::QrCode::reedSolomonMultiply(unsigned char, unsigned char)
+ 50.01      0.02     0.01        8     1.25     1.25  qrcodegen::QrCode::getPenaltyScore() const
+  0.00      0.02     0.00  1337072     0.00     0.00  qrcodegen::QrCode::module(int, int) const
+  0.00      0.02     0.00   237738     0.00     0.00  qrcodegen::QrCode::finderPenaltyAddHistory(int, std::array<int, 7ul>&) const
+  0.00      0.02     0.00   120221     0.00     0.00  qrcodegen::QrCode::finderPenaltyCountPatterns(std::array<int, 7ul> const&) const
+  0.00      0.02     0.00    28561     0.00     0.00  qrcodegen::QrCode::getModule(int, int) const
+  0.00      0.02     0.00     5307     0.00     0.00  void std::vector<unsigned char, std::allocator<unsigned char> >::emplace_back<unsigned char>(unsigned char&&)
+  0.00      0.02     0.00     2704     0.00     0.00  qrcodegen::QrCode::finderPenaltyTerminateAndCount(bool, int, std::array<int, 7ul>&) const
+  0.00      0.02     0.00     2703     0.00     0.00  qrcodegen::BitBuffer::appendBits(unsigned int, int)
+  0.00      0.02     0.00     2026     0.00     0.00  qrcodegen::QrCode::setFunctionModule(int, int, bool)
+  0.00      0.02     0.00       46     0.00     0.00  qrcodegen::QrCode::drawAlignmentPattern(int, int)
+  0.00      0.02     0.00       45     0.00     0.00  qrcodegen::QrCode::getNumRawDataModules(int)
+  0.00      0.02     0.00       43     0.00     0.00  qrcodegen::QrCode::getNumDataCodewords(int, qrcodegen::QrCode::Ecc)
+  0.00      0.02     0.00       38     0.00     0.00  qrcodegen::QrSegment::getTotalBits(std::vector<qrcodegen::QrSegment, std::allocator<qrcodegen::QrSegment> > const&, int)
+  0.00      0.02     0.00       22     0.00     0.45  qrcodegen::QrCode::reedSolomonComputeRemainder(std::vector<unsigned char, std::allocator<unsigned char> > const&, std::vector<unsigned char, std::allocator<unsigned char> > const&)
+  0.00      0.02     0.00       22     0.00     0.00  void std::vector<unsigned char, std::allocator<unsigned char> >::_M_range_insert<__gnu_cxx::__normal_iterator<unsigned char const*, std::vector<unsigned char, std::allocator<unsigned char> > > >(__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char> > >, __gnu_cxx::__normal_iterator<unsigned char const*, std::vector<unsigned char, std::allocator<unsigned char> > >, __gnu_cxx::__normal_iterator<unsigned char const*, std::vector<unsigned char, std::allocator<unsigned char> > >, std::forward_iterator_tag)
+  0.00      0.02     0.00       17     0.00     0.00  qrcodegen::QrCode::applyMask(int)
+  0.00      0.02     0.00       12     0.00     0.00  std::vector<bool, std::allocator<bool> >::_M_insert_aux(std::_Bit_iterator, bool)
+  0.00      0.02     0.00       10     0.00     0.00  qrcodegen::QrCode::getFormatBits(qrcodegen::QrCode::Ecc)
+  0.00      0.02     0.00       10     0.00     0.00  qrcodegen::QrCode::drawFormatBits(int)
+  0.00      0.02     0.00        6     0.00     0.00  void std::vector<std::vector<unsigned char, std::allocator<unsigned char> >, std::allocator<std::vector<unsigned char, std::allocator<unsigned char> > > >::_M_realloc_insert<std::vector<unsigned char, std::allocator<unsigned char> > >(__gnu_cxx::__normal_iterator<std::vector<unsigned char, std::allocator<unsigned char> >*, std::vector<std::vector<unsigned char, std::allocator<unsigned char> >, std::allocator<std::vector<unsigned char, std::allocator<unsigned char> > > > >, std::vector<unsigned char, std::allocator<unsigned char> >&&)
+  0.00      0.02     0.00        4     0.00     0.00  void std::vector<int, std::allocator<int> >::_M_realloc_insert<int const&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int const&)
+  0.00      0.02     0.00        3     0.00     0.00  qrcodegen::QrCode::drawFinderPattern(int, int)
+  0.00      0.02     0.00        3     0.00     0.00  void std::vector<int, std::allocator<int> >::_M_insert_aux<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&)
+  0.00      0.02     0.00        2     0.00     0.00  qrcodegen::BitBuffer::BitBuffer()
+  0.00      0.02     0.00        2     0.00     0.00  std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > >::~vector()
+  0.00      0.02     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN9qrcodegen9QrSegment4ModeC2Eiiii
+  0.00      0.02     0.00        1     0.00     0.00  _GLOBAL__sub_I_main
+  0.00      0.02     0.00        1     0.00    20.00  qrcodegen::QrCode::encodeText(char const*, qrcodegen::QrCode::Ecc)
+  0.00      0.02     0.00        1     0.00     0.00  qrcodegen::QrCode::drawVersion()
+  0.00      0.02     0.00        1     0.00     0.00  qrcodegen::QrCode::drawCodewords(std::vector<unsigned char, std::allocator<unsigned char> > const&)
+  0.00      0.02     0.00        1     0.00    20.00  qrcodegen::QrCode::encodeSegments(std::vector<qrcodegen::QrSegment, std::allocator<qrcodegen::QrSegment> > const&, qrcodegen::QrCode::Ecc, int, int, int, bool)
+  0.00      0.02     0.00        1     0.00     0.00  qrcodegen::QrCode::drawFunctionPatterns()
+  0.00      0.02     0.00        1     0.00     0.11  qrcodegen::QrCode::reedSolomonComputeDivisor(int)
+  0.00      0.02     0.00        1     0.00    20.00  qrcodegen::QrCode::QrCode(int, qrcodegen::QrCode::Ecc, std::vector<unsigned char, std::allocator<unsigned char> > const&, int)
+  0.00      0.02     0.00        1     0.00     0.00  qrcodegen::QrSegment::makeSegments(char const*)
+  0.00      0.02     0.00        1     0.00     0.00  qrcodegen::QrSegment::isAlphanumeric(char const*)
+  0.00      0.02     0.00        1     0.00     0.00  qrcodegen::QrSegment::isNumeric(char const*)
+  0.00      0.02     0.00        1     0.00     0.00  qrcodegen::QrSegment::makeBytes(std::vector<unsigned char, std::allocator<unsigned char> > const&)
+  0.00      0.02     0.00        1     0.00     0.00  qrcodegen::QrSegment::QrSegment(qrcodegen::QrSegment::Mode, int, std::vector<bool, std::allocator<bool> >&&)
+  0.00      0.02     0.00        1     0.00     0.00  qrcodegen::QrCode::toSvgString[abi:cxx11](int) const
+  0.00      0.02     0.00        1     0.00    10.00  qrcodegen::QrCode::addEccAndInterleave(std::vector<unsigned char, std::allocator<unsigned char> > const&) const
+  0.00      0.02     0.00        1     0.00     0.00  qrcodegen::QrCode::getAlignmentPatternPositions() const
+  0.00      0.02     0.00        1     0.00     0.00  void std::vector<qrcodegen::QrSegment, std::allocator<qrcodegen::QrSegment> >::emplace_back<qrcodegen::QrSegment>(qrcodegen::QrSegment&&)
+  0.00      0.02     0.00        1     0.00     0.00  void std::vector<qrcodegen::QrSegment, std::allocator<qrcodegen::QrSegment> >::_M_realloc_insert<qrcodegen::QrSegment>(__gnu_cxx::__normal_iterator<qrcodegen::QrSegment*, std::vector<qrcodegen::QrSegment, std::allocator<qrcodegen::QrSegment> > >, qrcodegen::QrSegment&&)
+  0.00      0.02     0.00        1     0.00     0.00  std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > >::_M_shrink_to_fit()
+  0.00      0.02     0.00        1     0.00     0.00  void std::vector<bool, std::allocator<bool> >::_M_insert_range<std::_Bit_const_iterator>(std::_Bit_iterator, std::_Bit_const_iterator, std::_Bit_const_iterator, std::forward_iterator_tag)
+  0.00      0.02     0.00        1     0.00     0.00  void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag)
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 2 byte(s) for 49.99% of 0.02 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]    100.0    0.00    0.02                 main [1]
+                0.00    0.02       1/1           qrcodegen::QrCode::encodeText(char const*, qrcodegen::QrCode::Ecc) [2]
+                0.00    0.00       2/2           std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > >::~vector() [38]
+                0.00    0.00       1/1           qrcodegen::QrCode::toSvgString[abi:cxx11](int) const [49]
+-----------------------------------------------
+                0.00    0.02       1/1           main [1]
+[2]    100.0    0.00    0.02       1         qrcodegen::QrCode::encodeText(char const*, qrcodegen::QrCode::Ecc) [2]
+                0.00    0.02       1/1           qrcodegen::QrCode::encodeSegments(std::vector<qrcodegen::QrSegment, std::allocator<qrcodegen::QrSegment> > const&, qrcodegen::QrCode::Ecc, int, int, int, bool) [3]
+                0.00    0.00       1/1           qrcodegen::QrSegment::makeSegments(char const*) [44]
+-----------------------------------------------
+                0.00    0.02       1/1           qrcodegen::QrCode::encodeText(char const*, qrcodegen::QrCode::Ecc) [2]
+[3]    100.0    0.00    0.02       1         qrcodegen::QrCode::encodeSegments(std::vector<qrcodegen::QrSegment, std::allocator<qrcodegen::QrSegment> > const&, qrcodegen::QrCode::Ecc, int, int, int, bool) [3]
+                0.00    0.02       1/1           qrcodegen::QrCode::QrCode(int, qrcodegen::QrCode::Ecc, std::vector<unsigned char, std::allocator<unsigned char> > const&, int) [4]
+                0.00    0.00     102/2703        qrcodegen::BitBuffer::appendBits(unsigned int, int) [22]
+                0.00    0.00      42/43          qrcodegen::QrCode::getNumDataCodewords(int, qrcodegen::QrCode::Ecc) [26]
+                0.00    0.00      38/38          qrcodegen::QrSegment::getTotalBits(std::vector<qrcodegen::QrSegment, std::allocator<qrcodegen::QrSegment> > const&, int) [27]
+                0.00    0.00       1/2           qrcodegen::BitBuffer::BitBuffer() [37]
+                0.00    0.00       1/1           void std::vector<bool, std::allocator<bool> >::_M_insert_range<std::_Bit_const_iterator>(std::_Bit_iterator, std::_Bit_const_iterator, std::_Bit_const_iterator, std::forward_iterator_tag) [54]
+-----------------------------------------------
+                0.00    0.02       1/1           qrcodegen::QrCode::encodeSegments(std::vector<qrcodegen::QrSegment, std::allocator<qrcodegen::QrSegment> > const&, qrcodegen::QrCode::Ecc, int, int, int, bool) [3]
+[4]    100.0    0.00    0.02       1         qrcodegen::QrCode::QrCode(int, qrcodegen::QrCode::Ecc, std::vector<unsigned char, std::allocator<unsigned char> > const&, int) [4]
+                0.01    0.00       8/8           qrcodegen::QrCode::getPenaltyScore() const [6]
+                0.00    0.01       1/1           qrcodegen::QrCode::addEccAndInterleave(std::vector<unsigned char, std::allocator<unsigned char> > const&) const [7]
+                0.00    0.00      17/17          qrcodegen::QrCode::applyMask(int) [29]
+                0.00    0.00       9/10          qrcodegen::QrCode::drawFormatBits(int) [32]
+                0.00    0.00       1/1           qrcodegen::QrCode::drawFunctionPatterns() [43]
+                0.00    0.00       1/1           qrcodegen::QrCode::drawCodewords(std::vector<unsigned char, std::allocator<unsigned char> > const&) [42]
+                0.00    0.00       1/1           std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > >::_M_shrink_to_fit() [53]
+-----------------------------------------------
+                0.00    0.00     930/81990       qrcodegen::QrCode::reedSolomonComputeDivisor(int) [9]
+                0.01    0.00   81060/81990       qrcodegen::QrCode::reedSolomonComputeRemainder(std::vector<unsigned char, std::allocator<unsigned char> > const&, std::vector<unsigned char, std::allocator<unsigned char> > const&) [8]
+[5]     50.0    0.01    0.00   81990         qrcodegen::QrCode::reedSolomonMultiply(unsigned char, unsigned char) [5]
+-----------------------------------------------
+                0.01    0.00       8/8           qrcodegen::QrCode::QrCode(int, qrcodegen::QrCode::Ecc, std::vector<unsigned char, std::allocator<unsigned char> > const&, int) [4]
+[6]     50.0    0.01    0.00       8         qrcodegen::QrCode::getPenaltyScore() const [6]
+                0.00    0.00 1308511/1337072     qrcodegen::QrCode::module(int, int) const [16]
+                0.00    0.00  233715/237738      qrcodegen::QrCode::finderPenaltyAddHistory(int, std::array<int, 7ul>&) const [17]
+                0.00    0.00  117517/120221      qrcodegen::QrCode::finderPenaltyCountPatterns(std::array<int, 7ul> const&) const [18]
+                0.00    0.00    2704/2704        qrcodegen::QrCode::finderPenaltyTerminateAndCount(bool, int, std::array<int, 7ul>&) const [21]
+-----------------------------------------------
+                0.00    0.01       1/1           qrcodegen::QrCode::QrCode(int, qrcodegen::QrCode::Ecc, std::vector<unsigned char, std::allocator<unsigned char> > const&, int) [4]
+[7]     50.0    0.00    0.01       1         qrcodegen::QrCode::addEccAndInterleave(std::vector<unsigned char, std::allocator<unsigned char> > const&) const [7]
+                0.00    0.01      22/22          qrcodegen::QrCode::reedSolomonComputeRemainder(std::vector<unsigned char, std::allocator<unsigned char> > const&, std::vector<unsigned char, std::allocator<unsigned char> > const&) [8]
+                0.00    0.00       1/1           qrcodegen::QrCode::reedSolomonComputeDivisor(int) [9]
+                0.00    0.00      22/22          void std::vector<unsigned char, std::allocator<unsigned char> >::_M_range_insert<__gnu_cxx::__normal_iterator<unsigned char const*, std::vector<unsigned char, std::allocator<unsigned char> > > >(__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char> > >, __gnu_cxx::__normal_iterator<unsigned char const*, std::vector<unsigned char, std::allocator<unsigned char> > >, __gnu_cxx::__normal_iterator<unsigned char const*, std::vector<unsigned char, std::allocator<unsigned char> > >, std::forward_iterator_tag) [28]
+                0.00    0.00       6/6           void std::vector<std::vector<unsigned char, std::allocator<unsigned char> >, std::allocator<std::vector<unsigned char, std::allocator<unsigned char> > > >::_M_realloc_insert<std::vector<unsigned char, std::allocator<unsigned char> > >(__gnu_cxx::__normal_iterator<std::vector<unsigned char, std::allocator<unsigned char> >*, std::vector<std::vector<unsigned char, std::allocator<unsigned char> >, std::allocator<std::vector<unsigned char, std::allocator<unsigned char> > > > >, std::vector<unsigned char, std::allocator<unsigned char> >&&) [33]
+                0.00    0.00       4/5307        void std::vector<unsigned char, std::allocator<unsigned char> >::emplace_back<unsigned char>(unsigned char&&) [20]
+                0.00    0.00       1/43          qrcodegen::QrCode::getNumDataCodewords(int, qrcodegen::QrCode::Ecc) [26]
+                0.00    0.00       1/45          qrcodegen::QrCode::getNumRawDataModules(int) [25]
+-----------------------------------------------
+                0.00    0.01      22/22          qrcodegen::QrCode::addEccAndInterleave(std::vector<unsigned char, std::allocator<unsigned char> > const&) const [7]
+[8]     49.4    0.00    0.01      22         qrcodegen::QrCode::reedSolomonComputeRemainder(std::vector<unsigned char, std::allocator<unsigned char> > const&, std::vector<unsigned char, std::allocator<unsigned char> > const&) [8]
+                0.01    0.00   81060/81990       qrcodegen::QrCode::reedSolomonMultiply(unsigned char, unsigned char) [5]
+                0.00    0.00    2702/5307        void std::vector<unsigned char, std::allocator<unsigned char> >::emplace_back<unsigned char>(unsigned char&&) [20]
+-----------------------------------------------
+                0.00    0.00       1/1           qrcodegen::QrCode::addEccAndInterleave(std::vector<unsigned char, std::allocator<unsigned char> > const&) const [7]
+[9]      0.6    0.00    0.00       1         qrcodegen::QrCode::reedSolomonComputeDivisor(int) [9]
+                0.00    0.00     930/81990       qrcodegen::QrCode::reedSolomonMultiply(unsigned char, unsigned char) [5]
+-----------------------------------------------
+                0.00    0.00   28561/1337072     qrcodegen::QrCode::getModule(int, int) const [19]
+                0.00    0.00 1308511/1337072     qrcodegen::QrCode::getPenaltyScore() const [6]
+[16]     0.0    0.00    0.00 1337072         qrcodegen::QrCode::module(int, int) const [16]
+-----------------------------------------------
+                0.00    0.00    4023/237738      qrcodegen::QrCode::finderPenaltyTerminateAndCount(bool, int, std::array<int, 7ul>&) const [21]
+                0.00    0.00  233715/237738      qrcodegen::QrCode::getPenaltyScore() const [6]
+[17]     0.0    0.00    0.00  237738         qrcodegen::QrCode::finderPenaltyAddHistory(int, std::array<int, 7ul>&) const [17]
+-----------------------------------------------
+                0.00    0.00    2704/120221      qrcodegen::QrCode::finderPenaltyTerminateAndCount(bool, int, std::array<int, 7ul>&) const [21]
+                0.00    0.00  117517/120221      qrcodegen::QrCode::getPenaltyScore() const [6]
+[18]     0.0    0.00    0.00  120221         qrcodegen::QrCode::finderPenaltyCountPatterns(std::array<int, 7ul> const&) const [18]
+-----------------------------------------------
+                0.00    0.00   28561/28561       qrcodegen::QrCode::toSvgString[abi:cxx11](int) const [49]
+[19]     0.0    0.00    0.00   28561         qrcodegen::QrCode::getModule(int, int) const [19]
+                0.00    0.00   28561/1337072     qrcodegen::QrCode::module(int, int) const [16]
+-----------------------------------------------
+                0.00    0.00       4/5307        qrcodegen::QrCode::addEccAndInterleave(std::vector<unsigned char, std::allocator<unsigned char> > const&) const [7]
+                0.00    0.00    2601/5307        qrcodegen::QrSegment::makeSegments(char const*) [44]
+                0.00    0.00    2702/5307        qrcodegen::QrCode::reedSolomonComputeRemainder(std::vector<unsigned char, std::allocator<unsigned char> > const&, std::vector<unsigned char, std::allocator<unsigned char> > const&) [8]
+[20]     0.0    0.00    0.00    5307         void std::vector<unsigned char, std::allocator<unsigned char> >::emplace_back<unsigned char>(unsigned char&&) [20]
+-----------------------------------------------
+                0.00    0.00    2704/2704        qrcodegen::QrCode::getPenaltyScore() const [6]
+[21]     0.0    0.00    0.00    2704         qrcodegen::QrCode::finderPenaltyTerminateAndCount(bool, int, std::array<int, 7ul>&) const [21]
+                0.00    0.00    4023/237738      qrcodegen::QrCode::finderPenaltyAddHistory(int, std::array<int, 7ul>&) const [17]
+                0.00    0.00    2704/120221      qrcodegen::QrCode::finderPenaltyCountPatterns(std::array<int, 7ul> const&) const [18]
+-----------------------------------------------
+                0.00    0.00     102/2703        qrcodegen::QrCode::encodeSegments(std::vector<qrcodegen::QrSegment, std::allocator<qrcodegen::QrSegment> > const&, qrcodegen::QrCode::Ecc, int, int, int, bool) [3]
+                0.00    0.00    2601/2703        qrcodegen::QrSegment::makeBytes(std::vector<unsigned char, std::allocator<unsigned char> > const&) [47]
+[22]     0.0    0.00    0.00    2703         qrcodegen::BitBuffer::appendBits(unsigned int, int) [22]
+                0.00    0.00      12/12          std::vector<bool, std::allocator<bool> >::_M_insert_aux(std::_Bit_iterator, bool) [30]
+-----------------------------------------------
+                0.00    0.00      36/2026        qrcodegen::QrCode::drawVersion() [41]
+                0.00    0.00     192/2026        qrcodegen::QrCode::drawFinderPattern(int, int) [35]
+                0.00    0.00     310/2026        qrcodegen::QrCode::drawFormatBits(int) [32]
+                0.00    0.00     338/2026        qrcodegen::QrCode::drawFunctionPatterns() [43]
+                0.00    0.00    1150/2026        qrcodegen::QrCode::drawAlignmentPattern(int, int) [24]
+[23]     0.0    0.00    0.00    2026         qrcodegen::QrCode::setFunctionModule(int, int, bool) [23]
+-----------------------------------------------
+                0.00    0.00      46/46          qrcodegen::QrCode::drawFunctionPatterns() [43]
+[24]     0.0    0.00    0.00      46         qrcodegen::QrCode::drawAlignmentPattern(int, int) [24]
+                0.00    0.00    1150/2026        qrcodegen::QrCode::setFunctionModule(int, int, bool) [23]
+-----------------------------------------------
+                0.00    0.00       1/45          qrcodegen::QrCode::drawCodewords(std::vector<unsigned char, std::allocator<unsigned char> > const&) [42]
+                0.00    0.00       1/45          qrcodegen::QrCode::addEccAndInterleave(std::vector<unsigned char, std::allocator<unsigned char> > const&) const [7]
+                0.00    0.00      43/45          qrcodegen::QrCode::getNumDataCodewords(int, qrcodegen::QrCode::Ecc) [26]
+[25]     0.0    0.00    0.00      45         qrcodegen::QrCode::getNumRawDataModules(int) [25]
+-----------------------------------------------
+                0.00    0.00       1/43          qrcodegen::QrCode::addEccAndInterleave(std::vector<unsigned char, std::allocator<unsigned char> > const&) const [7]
+                0.00    0.00      42/43          qrcodegen::QrCode::encodeSegments(std::vector<qrcodegen::QrSegment, std::allocator<qrcodegen::QrSegment> > const&, qrcodegen::QrCode::Ecc, int, int, int, bool) [3]
+[26]     0.0    0.00    0.00      43         qrcodegen::QrCode::getNumDataCodewords(int, qrcodegen::QrCode::Ecc) [26]
+                0.00    0.00      43/45          qrcodegen::QrCode::getNumRawDataModules(int) [25]
+-----------------------------------------------
+                0.00    0.00      38/38          qrcodegen::QrCode::encodeSegments(std::vector<qrcodegen::QrSegment, std::allocator<qrcodegen::QrSegment> > const&, qrcodegen::QrCode::Ecc, int, int, int, bool) [3]
+[27]     0.0    0.00    0.00      38         qrcodegen::QrSegment::getTotalBits(std::vector<qrcodegen::QrSegment, std::allocator<qrcodegen::QrSegment> > const&, int) [27]
+-----------------------------------------------
+                0.00    0.00      22/22          qrcodegen::QrCode::addEccAndInterleave(std::vector<unsigned char, std::allocator<unsigned char> > const&) const [7]
+[28]     0.0    0.00    0.00      22         void std::vector<unsigned char, std::allocator<unsigned char> >::_M_range_insert<__gnu_cxx::__normal_iterator<unsigned char const*, std::vector<unsigned char, std::allocator<unsigned char> > > >(__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char> > >, __gnu_cxx::__normal_iterator<unsigned char const*, std::vector<unsigned char, std::allocator<unsigned char> > >, __gnu_cxx::__normal_iterator<unsigned char const*, std::vector<unsigned char, std::allocator<unsigned char> > >, std::forward_iterator_tag) [28]
+-----------------------------------------------
+                0.00    0.00      17/17          qrcodegen::QrCode::QrCode(int, qrcodegen::QrCode::Ecc, std::vector<unsigned char, std::allocator<unsigned char> > const&, int) [4]
+[29]     0.0    0.00    0.00      17         qrcodegen::QrCode::applyMask(int) [29]
+-----------------------------------------------
+                0.00    0.00      12/12          qrcodegen::BitBuffer::appendBits(unsigned int, int) [22]
+[30]     0.0    0.00    0.00      12         std::vector<bool, std::allocator<bool> >::_M_insert_aux(std::_Bit_iterator, bool) [30]
+-----------------------------------------------
+                0.00    0.00      10/10          qrcodegen::QrCode::drawFormatBits(int) [32]
+[31]     0.0    0.00    0.00      10         qrcodegen::QrCode::getFormatBits(qrcodegen::QrCode::Ecc) [31]
+-----------------------------------------------
+                0.00    0.00       1/10          qrcodegen::QrCode::drawFunctionPatterns() [43]
+                0.00    0.00       9/10          qrcodegen::QrCode::QrCode(int, qrcodegen::QrCode::Ecc, std::vector<unsigned char, std::allocator<unsigned char> > const&, int) [4]
+[32]     0.0    0.00    0.00      10         qrcodegen::QrCode::drawFormatBits(int) [32]
+                0.00    0.00     310/2026        qrcodegen::QrCode::setFunctionModule(int, int, bool) [23]
+                0.00    0.00      10/10          qrcodegen::QrCode::getFormatBits(qrcodegen::QrCode::Ecc) [31]
+-----------------------------------------------
+                0.00    0.00       6/6           qrcodegen::QrCode::addEccAndInterleave(std::vector<unsigned char, std::allocator<unsigned char> > const&) const [7]
+[33]     0.0    0.00    0.00       6         void std::vector<std::vector<unsigned char, std::allocator<unsigned char> >, std::allocator<std::vector<unsigned char, std::allocator<unsigned char> > > >::_M_realloc_insert<std::vector<unsigned char, std::allocator<unsigned char> > >(__gnu_cxx::__normal_iterator<std::vector<unsigned char, std::allocator<unsigned char> >*, std::vector<std::vector<unsigned char, std::allocator<unsigned char> >, std::allocator<std::vector<unsigned char, std::allocator<unsigned char> > > > >, std::vector<unsigned char, std::allocator<unsigned char> >&&) [33]
+-----------------------------------------------
+                0.00    0.00       4/4           qrcodegen::QrCode::getAlignmentPatternPositions() const [50]
+[34]     0.0    0.00    0.00       4         void std::vector<int, std::allocator<int> >::_M_realloc_insert<int const&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int const&) [34]
+-----------------------------------------------
+                0.00    0.00       3/3           qrcodegen::QrCode::drawFunctionPatterns() [43]
+[35]     0.0    0.00    0.00       3         qrcodegen::QrCode::drawFinderPattern(int, int) [35]
+                0.00    0.00     192/2026        qrcodegen::QrCode::setFunctionModule(int, int, bool) [23]
+-----------------------------------------------
+                0.00    0.00       3/3           qrcodegen::QrCode::getAlignmentPatternPositions() const [50]
+[36]     0.0    0.00    0.00       3         void std::vector<int, std::allocator<int> >::_M_insert_aux<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) [36]
+-----------------------------------------------
+                0.00    0.00       1/2           qrcodegen::QrSegment::makeBytes(std::vector<unsigned char, std::allocator<unsigned char> > const&) [47]
+                0.00    0.00       1/2           qrcodegen::QrCode::encodeSegments(std::vector<qrcodegen::QrSegment, std::allocator<qrcodegen::QrSegment> > const&, qrcodegen::QrCode::Ecc, int, int, int, bool) [3]
+[37]     0.0    0.00    0.00       2         qrcodegen::BitBuffer::BitBuffer() [37]
+-----------------------------------------------
+                0.00    0.00       2/2           main [1]
+[38]     0.0    0.00    0.00       2         std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > >::~vector() [38]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [85]
+[39]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN9qrcodegen9QrSegment4ModeC2Eiiii [39]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [85]
+[40]     0.0    0.00    0.00       1         _GLOBAL__sub_I_main [40]
+-----------------------------------------------
+                0.00    0.00       1/1           qrcodegen::QrCode::drawFunctionPatterns() [43]
+[41]     0.0    0.00    0.00       1         qrcodegen::QrCode::drawVersion() [41]
+                0.00    0.00      36/2026        qrcodegen::QrCode::setFunctionModule(int, int, bool) [23]
+-----------------------------------------------
+                0.00    0.00       1/1           qrcodegen::QrCode::QrCode(int, qrcodegen::QrCode::Ecc, std::vector<unsigned char, std::allocator<unsigned char> > const&, int) [4]
+[42]     0.0    0.00    0.00       1         qrcodegen::QrCode::drawCodewords(std::vector<unsigned char, std::allocator<unsigned char> > const&) [42]
+                0.00    0.00       1/45          qrcodegen::QrCode::getNumRawDataModules(int) [25]
+-----------------------------------------------
+                0.00    0.00       1/1           qrcodegen::QrCode::QrCode(int, qrcodegen::QrCode::Ecc, std::vector<unsigned char, std::allocator<unsigned char> > const&, int) [4]
+[43]     0.0    0.00    0.00       1         qrcodegen::QrCode::drawFunctionPatterns() [43]
+                0.00    0.00     338/2026        qrcodegen::QrCode::setFunctionModule(int, int, bool) [23]
+                0.00    0.00      46/46          qrcodegen::QrCode::drawAlignmentPattern(int, int) [24]
+                0.00    0.00       3/3           qrcodegen::QrCode::drawFinderPattern(int, int) [35]
+                0.00    0.00       1/1           qrcodegen::QrCode::getAlignmentPatternPositions() const [50]
+                0.00    0.00       1/10          qrcodegen::QrCode::drawFormatBits(int) [32]
+                0.00    0.00       1/1           qrcodegen::QrCode::drawVersion() [41]
+-----------------------------------------------
+                0.00    0.00       1/1           qrcodegen::QrCode::encodeText(char const*, qrcodegen::QrCode::Ecc) [2]
+[44]     0.0    0.00    0.00       1         qrcodegen::QrSegment::makeSegments(char const*) [44]
+                0.00    0.00    2601/5307        void std::vector<unsigned char, std::allocator<unsigned char> >::emplace_back<unsigned char>(unsigned char&&) [20]
+                0.00    0.00       1/1           qrcodegen::QrSegment::isNumeric(char const*) [46]
+                0.00    0.00       1/1           qrcodegen::QrSegment::isAlphanumeric(char const*) [45]
+                0.00    0.00       1/1           void std::vector<qrcodegen::QrSegment, std::allocator<qrcodegen::QrSegment> >::emplace_back<qrcodegen::QrSegment>(qrcodegen::QrSegment&&) [51]
+                0.00    0.00       1/1           qrcodegen::QrSegment::makeBytes(std::vector<unsigned char, std::allocator<unsigned char> > const&) [47]
+-----------------------------------------------
+                0.00    0.00       1/1           qrcodegen::QrSegment::makeSegments(char const*) [44]
+[45]     0.0    0.00    0.00       1         qrcodegen::QrSegment::isAlphanumeric(char const*) [45]
+-----------------------------------------------
+                0.00    0.00       1/1           qrcodegen::QrSegment::makeSegments(char const*) [44]
+[46]     0.0    0.00    0.00       1         qrcodegen::QrSegment::isNumeric(char const*) [46]
+-----------------------------------------------
+                0.00    0.00       1/1           qrcodegen::QrSegment::makeSegments(char const*) [44]
+[47]     0.0    0.00    0.00       1         qrcodegen::QrSegment::makeBytes(std::vector<unsigned char, std::allocator<unsigned char> > const&) [47]
+                0.00    0.00    2601/2703        qrcodegen::BitBuffer::appendBits(unsigned int, int) [22]
+                0.00    0.00       1/2           qrcodegen::BitBuffer::BitBuffer() [37]
+                0.00    0.00       1/1           qrcodegen::QrSegment::QrSegment(qrcodegen::QrSegment::Mode, int, std::vector<bool, std::allocator<bool> >&&) [48]
+-----------------------------------------------
+                0.00    0.00       1/1           qrcodegen::QrSegment::makeBytes(std::vector<unsigned char, std::allocator<unsigned char> > const&) [47]
+[48]     0.0    0.00    0.00       1         qrcodegen::QrSegment::QrSegment(qrcodegen::QrSegment::Mode, int, std::vector<bool, std::allocator<bool> >&&) [48]
+-----------------------------------------------
+                0.00    0.00       1/1           main [1]
+[49]     0.0    0.00    0.00       1         qrcodegen::QrCode::toSvgString[abi:cxx11](int) const [49]
+                0.00    0.00   28561/28561       qrcodegen::QrCode::getModule(int, int) const [19]
+                0.00    0.00       1/1           void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [55]
+-----------------------------------------------
+                0.00    0.00       1/1           qrcodegen::QrCode::drawFunctionPatterns() [43]
+[50]     0.0    0.00    0.00       1         qrcodegen::QrCode::getAlignmentPatternPositions() const [50]
+                0.00    0.00       4/4           void std::vector<int, std::allocator<int> >::_M_realloc_insert<int const&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int const&) [34]
+                0.00    0.00       3/3           void std::vector<int, std::allocator<int> >::_M_insert_aux<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&) [36]
+-----------------------------------------------
+                0.00    0.00       1/1           qrcodegen::QrSegment::makeSegments(char const*) [44]
+[51]     0.0    0.00    0.00       1         void std::vector<qrcodegen::QrSegment, std::allocator<qrcodegen::QrSegment> >::emplace_back<qrcodegen::QrSegment>(qrcodegen::QrSegment&&) [51]
+                0.00    0.00       1/1           void std::vector<qrcodegen::QrSegment, std::allocator<qrcodegen::QrSegment> >::_M_realloc_insert<qrcodegen::QrSegment>(__gnu_cxx::__normal_iterator<qrcodegen::QrSegment*, std::vector<qrcodegen::QrSegment, std::allocator<qrcodegen::QrSegment> > >, qrcodegen::QrSegment&&) [52]
+-----------------------------------------------
+                0.00    0.00       1/1           void std::vector<qrcodegen::QrSegment, std::allocator<qrcodegen::QrSegment> >::emplace_back<qrcodegen::QrSegment>(qrcodegen::QrSegment&&) [51]
+[52]     0.0    0.00    0.00       1         void std::vector<qrcodegen::QrSegment, std::allocator<qrcodegen::QrSegment> >::_M_realloc_insert<qrcodegen::QrSegment>(__gnu_cxx::__normal_iterator<qrcodegen::QrSegment*, std::vector<qrcodegen::QrSegment, std::allocator<qrcodegen::QrSegment> > >, qrcodegen::QrSegment&&) [52]
+-----------------------------------------------
+                0.00    0.00       1/1           qrcodegen::QrCode::QrCode(int, qrcodegen::QrCode::Ecc, std::vector<unsigned char, std::allocator<unsigned char> > const&, int) [4]
+[53]     0.0    0.00    0.00       1         std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > >::_M_shrink_to_fit() [53]
+-----------------------------------------------
+                0.00    0.00       1/1           qrcodegen::QrCode::encodeSegments(std::vector<qrcodegen::QrSegment, std::allocator<qrcodegen::QrSegment> > const&, qrcodegen::QrCode::Ecc, int, int, int, bool) [3]
+[54]     0.0    0.00    0.00       1         void std::vector<bool, std::allocator<bool> >::_M_insert_range<std::_Bit_const_iterator>(std::_Bit_iterator, std::_Bit_const_iterator, std::_Bit_const_iterator, std::forward_iterator_tag) [54]
+-----------------------------------------------
+                0.00    0.00       1/1           qrcodegen::QrCode::toSvgString[abi:cxx11](int) const [49]
+[55]     0.0    0.00    0.00       1         void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag) [55]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+  [39] _GLOBAL__sub_I__ZN9qrcodegen9QrSegment4ModeC2Eiiii [8] qrcodegen::QrCode::reedSolomonComputeRemainder(std::vector<unsigned char, std::allocator<unsigned char> > const&, std::vector<unsigned char, std::allocator<unsigned char> > const&) [50] qrcodegen::QrCode::getAlignmentPatternPositions() const
+  [40] _GLOBAL__sub_I_main    [29] qrcodegen::QrCode::applyMask(int) [21] qrcodegen::QrCode::finderPenaltyTerminateAndCount(bool, int, std::array<int, 7ul>&) const
+   [2] qrcodegen::QrCode::encodeText(char const*, qrcodegen::QrCode::Ecc) [4] qrcodegen::QrCode::QrCode(int, qrcodegen::QrCode::Ecc, std::vector<unsigned char, std::allocator<unsigned char> > const&, int) [16] qrcodegen::QrCode::module(int, int) const
+  [41] qrcodegen::QrCode::drawVersion() [22] qrcodegen::BitBuffer::appendBits(unsigned int, int) [19] qrcodegen::QrCode::getModule(int, int) const
+  [42] qrcodegen::QrCode::drawCodewords(std::vector<unsigned char, std::allocator<unsigned char> > const&) [37] qrcodegen::BitBuffer::BitBuffer() [51] void std::vector<qrcodegen::QrSegment, std::allocator<qrcodegen::QrSegment> >::emplace_back<qrcodegen::QrSegment>(qrcodegen::QrSegment&&)
+  [31] qrcodegen::QrCode::getFormatBits(qrcodegen::QrCode::Ecc) [27] qrcodegen::QrSegment::getTotalBits(std::vector<qrcodegen::QrSegment, std::allocator<qrcodegen::QrSegment> > const&, int) [52] void std::vector<qrcodegen::QrSegment, std::allocator<qrcodegen::QrSegment> >::_M_realloc_insert<qrcodegen::QrSegment>(__gnu_cxx::__normal_iterator<qrcodegen::QrSegment*, std::vector<qrcodegen::QrSegment, std::allocator<qrcodegen::QrSegment> > >, qrcodegen::QrSegment&&)
+  [32] qrcodegen::QrCode::drawFormatBits(int) [44] qrcodegen::QrSegment::makeSegments(char const*) [53] std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > >::_M_shrink_to_fit()
+   [3] qrcodegen::QrCode::encodeSegments(std::vector<qrcodegen::QrSegment, std::allocator<qrcodegen::QrSegment> > const&, qrcodegen::QrCode::Ecc, int, int, int, bool) [45] qrcodegen::QrSegment::isAlphanumeric(char const*) [38] std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > >::~vector()
+  [35] qrcodegen::QrCode::drawFinderPattern(int, int) [46] qrcodegen::QrSegment::isNumeric(char const*) [33] void std::vector<std::vector<unsigned char, std::allocator<unsigned char> >, std::allocator<std::vector<unsigned char, std::allocator<unsigned char> > > >::_M_realloc_insert<std::vector<unsigned char, std::allocator<unsigned char> > >(__gnu_cxx::__normal_iterator<std::vector<unsigned char, std::allocator<unsigned char> >*, std::vector<std::vector<unsigned char, std::allocator<unsigned char> >, std::allocator<std::vector<unsigned char, std::allocator<unsigned char> > > > >, std::vector<unsigned char, std::allocator<unsigned char> >&&)
+  [23] qrcodegen::QrCode::setFunctionModule(int, int, bool) [47] qrcodegen::QrSegment::makeBytes(std::vector<unsigned char, std::allocator<unsigned char> > const&) [30] std::vector<bool, std::allocator<bool> >::_M_insert_aux(std::_Bit_iterator, bool)
+  [26] qrcodegen::QrCode::getNumDataCodewords(int, qrcodegen::QrCode::Ecc) [48] qrcodegen::QrSegment::QrSegment(qrcodegen::QrSegment::Mode, int, std::vector<bool, std::allocator<bool> >&&) [54] void std::vector<bool, std::allocator<bool> >::_M_insert_range<std::_Bit_const_iterator>(std::_Bit_iterator, std::_Bit_const_iterator, std::_Bit_const_iterator, std::forward_iterator_tag)
+   [5] qrcodegen::QrCode::reedSolomonMultiply(unsigned char, unsigned char) [49] qrcodegen::QrCode::toSvgString[abi:cxx11](int) const [20] void std::vector<unsigned char, std::allocator<unsigned char> >::emplace_back<unsigned char>(unsigned char&&)
+  [24] qrcodegen::QrCode::drawAlignmentPattern(int, int) [6] qrcodegen::QrCode::getPenaltyScore() const [28] void std::vector<unsigned char, std::allocator<unsigned char> >::_M_range_insert<__gnu_cxx::__normal_iterator<unsigned char const*, std::vector<unsigned char, std::allocator<unsigned char> > > >(__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char> > >, __gnu_cxx::__normal_iterator<unsigned char const*, std::vector<unsigned char, std::allocator<unsigned char> > >, __gnu_cxx::__normal_iterator<unsigned char const*, std::vector<unsigned char, std::allocator<unsigned char> > >, std::forward_iterator_tag)
+  [43] qrcodegen::QrCode::drawFunctionPatterns() [7] qrcodegen::QrCode::addEccAndInterleave(std::vector<unsigned char, std::allocator<unsigned char> > const&) const [36] void std::vector<int, std::allocator<int> >::_M_insert_aux<int>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int&&)
+  [25] qrcodegen::QrCode::getNumRawDataModules(int) [17] qrcodegen::QrCode::finderPenaltyAddHistory(int, std::array<int, 7ul>&) const [34] void std::vector<int, std::allocator<int> >::_M_realloc_insert<int const&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int const&)
+   [9] qrcodegen::QrCode::reedSolomonComputeDivisor(int) [18] qrcodegen::QrCode::finderPenaltyCountPatterns(std::array<int, 7ul> const&) const [55] void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag)
