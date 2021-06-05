@@ -30,11 +30,30 @@
 #include <stdexcept>
 #include <utility>
 #include "QrCode.hpp"
+#include <omp.h>
+// #include <mpi.h>
 
 using std::int8_t;
 using std::uint8_t;
 using std::size_t;
 using std::vector;
+
+
+void split_range(int n1, int n2, int *nproc, int *irank, int *ista, int *iend)
+{
+  int iwork1, iwork2, delta;
+  delta = n2 - n1 + 1;
+  iwork1 = delta / *nproc;
+  iwork2 = (delta) % *nproc;
+  if (*irank < iwork2){
+    *ista = *irank * iwork1 + n1 +*irank;
+  }else{
+    *ista = *irank * iwork1 + n1 + iwork2;
+  }
+  *iend = *ista + iwork1 - 1;
+  if (iwork2 > *irank)
+    *iend++;
+}
 
 
 namespace qrcodegen {
@@ -279,6 +298,7 @@ QrCode QrCode::encodeSegments(const vector<QrSegment> &segs, Ecc ecl,
 		throw std::logic_error("Assertion error");
 	
 	// Increase the error correction level while the data still fits in the current version number
+	// #pragma omp parallel for
 	for (Ecc newEcl : vector<Ecc>{Ecc::MEDIUM, Ecc::QUARTILE, Ecc::HIGH}) {  // From low to high
 		if (boostEcl && dataUsedBits <= getNumDataCodewords(version, newEcl) * 8)
 			ecl = newEcl;
@@ -308,10 +328,29 @@ QrCode QrCode::encodeSegments(const vector<QrSegment> &segs, Ecc ecl,
 		bb.appendBits(padByte, 8);
 	
 	// Pack bits into bytes in big endian
+
 	vector<uint8_t> dataCodewords(bb.size() / 8);
+	// vector<uint8_t> otroDataCodewords(bb.size() / 8);
+	// int iproc, nproc = 2, ista, iend;
+	// uint8_t dott;
+
+	// // MPI_Init(&argc, &argv);
+	// MPI_Request request;
+
+	// MPI_Comm_rank(MPI_COMM_WORLD, &iproc);
+	// MPI_Comm_size(MPI_COMM_WORLD, &nproc);
+
+	// split_range(0, bb.size()-1, &nproc, &iproc, &ista, &iend);
+
+	// printf("Limits: %d to %d\n", ista, iend);
 	for (size_t i = 0; i < bb.size(); i++)
+		// otroDataCodewords[i >> 3] = dataCodewords[i >> 3] | (bb.at(i) ? 1 : 0) << (7 - (i & 7));
 		dataCodewords[i >> 3] |= (bb.at(i) ? 1 : 0) << (7 - (i & 7));
 	
+	// MPI_Ireduce(&dataCodewords[(bb.size()-1)>>3], &dott, 1, MPI_UINT8_T, MPI_LOR, 0, MPI_COMM_WORLD, &request);
+	// if (iproc == 0)
+	// 	dataCodewords[(bb.size()-1)>>3] = dott;
+
 	// Create the QR Code object
 	return QrCode(version, ecl, dataCodewords, mask);
 }
@@ -415,6 +454,7 @@ std::string QrCode::toSvgString(int border) const {
 
 void QrCode::drawFunctionPatterns() {
 	// Draw horizontal and vertical timing patterns
+	// #pragma omp parallel for
 	for (int i = 0; i < size; i++) {
 		setFunctionModule(6, i, i % 2 == 0);
 		setFunctionModule(i, 6, i % 2 == 0);
@@ -428,11 +468,17 @@ void QrCode::drawFunctionPatterns() {
 	// Draw numerous alignment patterns
 	const vector<int> alignPatPos = getAlignmentPatternPositions();
 	size_t numAlign = alignPatPos.size();
+	#pragma omp parallel for
 	for (size_t i = 0; i < numAlign; i++) {
+		// #pragma omp parallel for
 		for (size_t j = 0; j < numAlign; j++) {
 			// Don't draw on the three finder corners
-			if (!((i == 0 && j == 0) || (i == 0 && j == numAlign - 1) || (i == numAlign - 1 && j == 0)))
-				drawAlignmentPattern(alignPatPos.at(i), alignPatPos.at(j));
+			if (!((i == 0 && j == 0) || (i == 0 && j == numAlign - 1) || (i == numAlign - 1 && j == 0))){
+				#pragma omp critical
+				{
+					drawAlignmentPattern(alignPatPos.at(i), alignPatPos.at(j));
+				}
+			}
 		}
 	}
 	
@@ -476,6 +522,7 @@ void QrCode::drawVersion() {
 	
 	// Calculate error correction code and pack bits
 	int rem = version;  // version is uint6, in the range [7, 40]
+	#pragma omp parallel for
 	for (int i = 0; i < 12; i++)
 		rem = (rem << 1) ^ ((rem >> 11) * 0x1F25);
 	long bits = static_cast<long>(version) << 12 | rem;  // uint18
@@ -483,6 +530,7 @@ void QrCode::drawVersion() {
 		throw std::logic_error("Assertion error");
 	
 	// Draw two copies
+	#pragma omp parallel for
 	for (int i = 0; i < 18; i++) {
 		bool bit = getBit(bits, i);
 		int a = size - 11 + i % 3;
@@ -494,21 +542,31 @@ void QrCode::drawVersion() {
 
 
 void QrCode::drawFinderPattern(int x, int y) {
+	#pragma omp parallel for
 	for (int dy = -4; dy <= 4; dy++) {
 		for (int dx = -4; dx <= 4; dx++) {
 			int dist = std::max(std::abs(dx), std::abs(dy));  // Chebyshev/infinity norm
 			int xx = x + dx, yy = y + dy;
-			if (0 <= xx && xx < size && 0 <= yy && yy < size)
+			if (0 <= xx && xx < size && 0 <= yy && yy < size){
+				#pragma omp critical
+				{
 				setFunctionModule(xx, yy, dist != 2 && dist != 4);
+				}
+			}
 		}
 	}
 }
 
 
 void QrCode::drawAlignmentPattern(int x, int y) {
+	#pragma omp parallel for
 	for (int dy = -2; dy <= 2; dy++) {
-		for (int dx = -2; dx <= 2; dx++)
+		for (int dx = -2; dx <= 2; dx++){
+			#pragma omp critical
+			{
 			setFunctionModule(x + dx, y + dy, std::max(std::abs(dx), std::abs(dy)) != 1);
+			}
+		}
 	}
 }
 
@@ -597,21 +655,26 @@ void QrCode::applyMask(int msk) {
 	if (msk < 0 || msk > 7)
 		throw std::domain_error("Mask value out of range");
 	size_t sz = static_cast<size_t>(size);
+	#pragma omp parallel for
 	for (size_t y = 0; y < sz; y++) {
+		#pragma omp parallel for
 		for (size_t x = 0; x < sz; x++) {
 			bool invert;
-			switch (msk) {
-				case 0:  invert = (x + y) % 2 == 0;                    break;
-				case 1:  invert = y % 2 == 0;                          break;
-				case 2:  invert = x % 3 == 0;                          break;
-				case 3:  invert = (x + y) % 3 == 0;                    break;
-				case 4:  invert = (x / 3 + y / 2) % 2 == 0;            break;
-				case 5:  invert = x * y % 2 + x * y % 3 == 0;          break;
-				case 6:  invert = (x * y % 2 + x * y % 3) % 2 == 0;    break;
-				case 7:  invert = ((x + y) % 2 + x * y % 3) % 2 == 0;  break;
-				default:  throw std::logic_error("Assertion error");
+			#pragma omp critical
+			{
+				switch (msk) {
+					case 0:  invert = (x + y) % 2 == 0;                    break;
+					case 1:  invert = y % 2 == 0;                          break;
+					case 2:  invert = x % 3 == 0;                          break;
+					case 3:  invert = (x + y) % 3 == 0;                    break;
+					case 4:  invert = (x / 3 + y / 2) % 2 == 0;            break;
+					case 5:  invert = x * y % 2 + x * y % 3 == 0;          break;
+					case 6:  invert = (x * y % 2 + x * y % 3) % 2 == 0;    break;
+					case 7:  invert = ((x + y) % 2 + x * y % 3) % 2 == 0;  break;
+					default:  throw std::logic_error("Assertion error");
+				}
+				modules.at(y).at(x) = modules.at(y).at(x) ^ (invert & !isFunction.at(y).at(x));
 			}
-			modules.at(y).at(x) = modules.at(y).at(x) ^ (invert & !isFunction.at(y).at(x));
 		}
 	}
 }
@@ -621,10 +684,12 @@ long QrCode::getPenaltyScore() const {
 	long result = 0;
 	
 	// Adjacent modules in row having same color, and finder-like patterns
+	#pragma omp parallel for
 	for (int y = 0; y < size; y++) {
 		bool runColor = false;
 		int runX = 0;
 		std::array<int,7> runHistory = {};
+		#pragma omp parallel for
 		for (int x = 0; x < size; x++) {
 			if (module(x, y) == runColor) {
 				runX++;
@@ -643,10 +708,12 @@ long QrCode::getPenaltyScore() const {
 		result += finderPenaltyTerminateAndCount(runColor, runX, runHistory) * PENALTY_N3;
 	}
 	// Adjacent modules in column having same color, and finder-like patterns
+	#pragma omp parallel for
 	for (int x = 0; x < size; x++) {
 		bool runColor = false;
 		int runY = 0;
 		std::array<int,7> runHistory = {};
+		#pragma omp parallel for
 		for (int y = 0; y < size; y++) {
 			if (module(x, y) == runColor) {
 				runY++;
@@ -762,6 +829,7 @@ vector<uint8_t> QrCode::reedSolomonComputeRemainder(const vector<uint8_t> &data,
 		uint8_t factor = b ^ result.at(0);
 		result.erase(result.begin());
 		result.push_back(0);
+		#pragma omp parallel for
 		for (size_t i = 0; i < result.size(); i++)
 			result.at(i) ^= reedSolomonMultiply(divisor.at(i), factor);
 	}

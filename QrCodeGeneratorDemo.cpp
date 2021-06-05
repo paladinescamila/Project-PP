@@ -32,6 +32,7 @@
 #include <vector>
 #include "QrCode.hpp"
 #include <omp.h>
+// #include <mpi.h>
 
 using std::uint8_t;
 using qrcodegen::QrCode;
@@ -47,15 +48,19 @@ static void printQr(const QrCode &qr);
 
 
 // The main application program.
-int main() {
+int main(int argc, char** argv) {
 	double start, end;
 	int N = 2600;
+
+	// MPI_Init(&argc, &argv);
 
 	start = omp_get_wtime();
 	doBasicDemo(N);
 	end = omp_get_wtime();
 
-	printf("N: %d, Tiempo: %f\n", N, end - start);
+	// MPI_Finalize();
+
+	// printf("N: %d, Tiempo: %f\n", N, end - start);
 
 	return EXIT_SUCCESS;
 }
@@ -70,6 +75,7 @@ static void doBasicDemo(int n) {
 	char* text = new char[n];
 	for (int i = 0; i < n; i++)
 		text[i] = '*';
+	// const char *text = "Hello World 20!";
 
 	const QrCode::Ecc errCorLvl = QrCode::Ecc::LOW;  // Error correction level
 	
