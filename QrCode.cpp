@@ -298,7 +298,6 @@ QrCode QrCode::encodeSegments(const vector<QrSegment> &segs, Ecc ecl,
 		throw std::logic_error("Assertion error");
 	
 	// Increase the error correction level while the data still fits in the current version number
-	// #pragma omp parallel for
 	for (Ecc newEcl : vector<Ecc>{Ecc::MEDIUM, Ecc::QUARTILE, Ecc::HIGH}) {  // From low to high
 		if (boostEcl && dataUsedBits <= getNumDataCodewords(version, newEcl) * 8)
 			ecl = newEcl;
@@ -454,7 +453,6 @@ std::string QrCode::toSvgString(int border) const {
 
 void QrCode::drawFunctionPatterns() {
 	// Draw horizontal and vertical timing patterns
-	// #pragma omp parallel for
 	for (int i = 0; i < size; i++) {
 		setFunctionModule(6, i, i % 2 == 0);
 		setFunctionModule(i, 6, i % 2 == 0);
@@ -470,14 +468,14 @@ void QrCode::drawFunctionPatterns() {
 	size_t numAlign = alignPatPos.size();
 	#pragma omp parallel for
 	for (size_t i = 0; i < numAlign; i++) {
-		// #pragma omp parallel for
+		#pragma omp parallel for
 		for (size_t j = 0; j < numAlign; j++) {
 			// Don't draw on the three finder corners
 			if (!((i == 0 && j == 0) || (i == 0 && j == numAlign - 1) || (i == numAlign - 1 && j == 0))){
-				#pragma omp critical
-				{
+				// #pragma omp critical
+				// {
 					drawAlignmentPattern(alignPatPos.at(i), alignPatPos.at(j));
-				}
+				// }
 			}
 		}
 	}
@@ -548,10 +546,10 @@ void QrCode::drawFinderPattern(int x, int y) {
 			int dist = std::max(std::abs(dx), std::abs(dy));  // Chebyshev/infinity norm
 			int xx = x + dx, yy = y + dy;
 			if (0 <= xx && xx < size && 0 <= yy && yy < size){
-				#pragma omp critical
-				{
+				// #pragma omp critical
+				// {
 				setFunctionModule(xx, yy, dist != 2 && dist != 4);
-				}
+				// }
 			}
 		}
 	}
@@ -561,11 +559,12 @@ void QrCode::drawFinderPattern(int x, int y) {
 void QrCode::drawAlignmentPattern(int x, int y) {
 	#pragma omp parallel for
 	for (int dy = -2; dy <= 2; dy++) {
+		#pragma omp parallel for
 		for (int dx = -2; dx <= 2; dx++){
-			#pragma omp critical
-			{
+			// #pragma omp critical
+			// {
 			setFunctionModule(x + dx, y + dy, std::max(std::abs(dx), std::abs(dy)) != 1);
-			}
+			// }
 		}
 	}
 }
@@ -660,8 +659,8 @@ void QrCode::applyMask(int msk) {
 		#pragma omp parallel for
 		for (size_t x = 0; x < sz; x++) {
 			bool invert;
-			#pragma omp critical
-			{
+			// #pragma omp critical
+			// {
 				switch (msk) {
 					case 0:  invert = (x + y) % 2 == 0;                    break;
 					case 1:  invert = y % 2 == 0;                          break;
@@ -674,7 +673,7 @@ void QrCode::applyMask(int msk) {
 					default:  throw std::logic_error("Assertion error");
 				}
 				modules.at(y).at(x) = modules.at(y).at(x) ^ (invert & !isFunction.at(y).at(x));
-			}
+			// }
 		}
 	}
 }

@@ -80,10 +80,11 @@ static void doBasicDemo(int n) {
 	const QrCode::Ecc errCorLvl = QrCode::Ecc::LOW;  // Error correction level
 	
 	// Make and print the QR Code symbol
-	const QrCode qr = QrCode::encodeText(text, errCorLvl);
+	const QrCode qr = QrCode::encodeText("un texto", errCorLvl);
+	// const QrCode qr = QrCode::encodeText(text, errCorLvl);
 	// printQr(qr);
-	// std::cout << qr.toSvgString(4) << std::endl;
-	qr.toSvgString(4);
+	std::cout << qr.toSvgString(4) << std::endl;
+	// qr.toSvgString(4);
 	free(text);
 }
 
