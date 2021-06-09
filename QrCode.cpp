@@ -31,7 +31,7 @@
 #include <utility>
 #include "QrCode.hpp"
 #include <omp.h>
-// #include <mpi.h>
+#include <mpi.h>
 
 using std::int8_t;
 using std::uint8_t;
@@ -329,26 +329,25 @@ QrCode QrCode::encodeSegments(const vector<QrSegment> &segs, Ecc ecl,
 	// Pack bits into bytes in big endian
 
 	vector<uint8_t> dataCodewords(bb.size() / 8);
-	// vector<uint8_t> otroDataCodewords(bb.size() / 8);
-	// int iproc, nproc = 2, ista, iend;
-	// uint8_t dott;
+	#pragma omp sections
+	{
+		#pragma omp section
+		{
+			for (size_t i = 0; i < bb.size()/2; i++){
+				dataCodewords[i >> 3] |= (bb.at(i) ? 1 : 0) << (7 - (i & 7));
+			}
+		}
 
-	// // MPI_Init(&argc, &argv);
-	// MPI_Request request;
-
-	// MPI_Comm_rank(MPI_COMM_WORLD, &iproc);
-	// MPI_Comm_size(MPI_COMM_WORLD, &nproc);
-
-	// split_range(0, bb.size()-1, &nproc, &iproc, &ista, &iend);
-
-	// printf("Limits: %d to %d\n", ista, iend);
-	for (size_t i = 0; i < bb.size(); i++)
-		// otroDataCodewords[i >> 3] = dataCodewords[i >> 3] | (bb.at(i) ? 1 : 0) << (7 - (i & 7));
-		dataCodewords[i >> 3] |= (bb.at(i) ? 1 : 0) << (7 - (i & 7));
-	
-	// MPI_Ireduce(&dataCodewords[(bb.size()-1)>>3], &dott, 1, MPI_UINT8_T, MPI_LOR, 0, MPI_COMM_WORLD, &request);
-	// if (iproc == 0)
-	// 	dataCodewords[(bb.size()-1)>>3] = dott;
+		#pragma omp section
+		{
+			for (size_t i = bb.size()/2; i < bb.size(); i++){
+				dataCodewords[i >> 3] |= (bb.at(i) ? 1 : 0) << (7 - (i & 7));
+			}
+		}
+	}
+	// #pragma omp parallel for
+	// for (size_t i = 0; i < bb.size(); i++)
+	// 	dataCodewords[i >> 3] |= (bb.at(i) ? 1 : 0) << (7 - (i & 7));
 
 	// Create the QR Code object
 	return QrCode(version, ecl, dataCodewords, mask);
@@ -497,17 +496,21 @@ void QrCode::drawFormatBits(int msk) {
 		throw std::logic_error("Assertion error");
 	
 	// Draw first copy
+	// #pragma omp parallel for ordered
 	for (int i = 0; i <= 5; i++)
 		setFunctionModule(8, i, getBit(bits, i));
 	setFunctionModule(8, 7, getBit(bits, 6));
 	setFunctionModule(8, 8, getBit(bits, 7));
 	setFunctionModule(7, 8, getBit(bits, 8));
+	// #pragma omp parallel for ordered
 	for (int i = 9; i < 15; i++)
 		setFunctionModule(14 - i, 8, getBit(bits, i));
 	
 	// Draw second copy
+	// #pragma omp parallel for ordered
 	for (int i = 0; i < 8; i++)
 		setFunctionModule(size - 1 - i, 8, getBit(bits, i));
+	// #pragma omp parallel for ordered
 	for (int i = 8; i < 15; i++)
 		setFunctionModule(8, size - 15 + i, getBit(bits, i));
 	setFunctionModule(8, size - 8, true);  // Always black
@@ -732,14 +735,27 @@ long QrCode::getPenaltyScore() const {
 	}
 	
 	// 2*2 blocks of modules having same color
+	int iproc, nproc = 2, ista, iend;
+	long dott;
+	MPI_Request request;
+
+
 	for (int y = 0; y < size - 1; y++) {
-		for (int x = 0; x < size - 1; x++) {
+		MPI_Comm_rank(MPI_COMM_WORLD, &iproc);
+		MPI_Comm_size(MPI_COMM_WORLD, &nproc);
+
+		split_range(0, size-2, &nproc, &iproc, &ista, &iend);
+
+		for (int x = ista; x <= iend; x++) {
 			bool  color = module(x, y);
 			if (  color == module(x + 1, y) &&
 			      color == module(x, y + 1) &&
 			      color == module(x + 1, y + 1))
 				result += PENALTY_N2;
 		}
+		MPI_Ireduce(&result, &dott, 1, MPI_LONG, MPI_SUM, 0, MPI_COMM_WORLD, &request);
+		MPI_Wait(&request, MPI_STATUS_IGNORE);
+		result = dott;
 	}
 	
 	// Balance of black and white modules
@@ -809,15 +825,42 @@ vector<uint8_t> QrCode::reedSolomonComputeDivisor(int degree) {
 	// and drop the highest monomial term which is always 1x^degree.
 	// Note that r = 0x02, which is a generator element of this field GF(2^8/0x11D).
 	uint8_t root = 1;
-	for (int i = 0; i < degree; i++) {
-		// Multiply the current product by (x - r^i)
-		for (size_t j = 0; j < result.size(); j++) {
-			result.at(j) = reedSolomonMultiply(result.at(j), root);
-			if (j + 1 < result.size())
-				result.at(j) ^= result.at(j + 1);
+	#pragma omp sections
+	{
+		#pragma omp section
+		{
+			for (int i = 0; i < degree/2; i++){
+				for (size_t j = 0; j < result.size(); j++) {
+					result.at(j) = reedSolomonMultiply(result.at(j), root);
+					if (j + 1 < result.size())
+						result.at(j) ^= result.at(j + 1);
+				}
+				root = reedSolomonMultiply(root, 0x02);
+			}
 		}
-		root = reedSolomonMultiply(root, 0x02);
+
+		#pragma omp section
+		{
+			for (int i = degree/2; i < degree; i++){
+				for (size_t j = 0; j < result.size(); j++) {
+					result.at(j) = reedSolomonMultiply(result.at(j), root);
+					if (j + 1 < result.size())
+						result.at(j) ^= result.at(j + 1);
+				}
+				root = reedSolomonMultiply(root, 0x02);
+			}
+		}
 	}
+	
+	// for (int i = 0; i < degree; i++) {
+	// 	// Multiply the current product by (x - r^i)
+	// 	for (size_t j = 0; j < result.size(); j++) {
+	// 		result.at(j) = reedSolomonMultiply(result.at(j), root);
+	// 		if (j + 1 < result.size())
+	// 			result.at(j) ^= result.at(j + 1);
+	// 	}
+	// 	root = reedSolomonMultiply(root, 0x02);
+	// }
 	return result;
 }
 
