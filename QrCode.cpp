@@ -467,16 +467,46 @@ void QrCode::drawFunctionPatterns() {
 	size_t numAlign = alignPatPos.size();
 	#pragma omp parallel for
 	for (size_t i = 0; i < numAlign; i++) {
-		#pragma omp parallel for
-		for (size_t j = 0; j < numAlign; j++) {
-			// Don't draw on the three finder corners
-			if (!((i == 0 && j == 0) || (i == 0 && j == numAlign - 1) || (i == numAlign - 1 && j == 0))){
-				// #pragma omp critical
-				// {
-					drawAlignmentPattern(alignPatPos.at(i), alignPatPos.at(j));
-				// }
+
+		#pragma omp parallel sections
+		{
+
+			#pragma omp section
+			{
+
+				for (size_t j = 0; j < numAlign/2; j++) {
+					// Don't draw on the three finder corners
+					if (!((i == 0 && j == 0) || (i == 0 && j == numAlign - 1) || (i == numAlign - 1 && j == 0))){
+						// #pragma omp critical
+						// {
+							drawAlignmentPattern(alignPatPos.at(i), alignPatPos.at(j));
+						// }
+					}
+				}		
+			}
+
+			#pragma omp section
+			{
+				for (size_t j = numAlign/2; j < numAlign; j++) {
+					// Don't draw on the three finder corners
+					if (!((i == 0 && j == 0) || (i == 0 && j == numAlign - 1) || (i == numAlign - 1 && j == 0))){
+						// #pragma omp critical
+						// {
+							drawAlignmentPattern(alignPatPos.at(i), alignPatPos.at(j));
+						// }
+					}
+				}
 			}
 		}
+		// for (size_t j = 0; j < numAlign; j++) {
+		// 	// Don't draw on the three finder corners
+		// 	if (!((i == 0 && j == 0) || (i == 0 && j == numAlign - 1) || (i == numAlign - 1 && j == 0))){
+		// 		// #pragma omp critical
+		// 		// {
+		// 			drawAlignmentPattern(alignPatPos.at(i), alignPatPos.at(j));
+		// 		// }
+		// 	}
+		// }
 	}
 	
 	// Draw configuration data
@@ -754,7 +784,7 @@ long QrCode::getPenaltyScore() const {
 				result += PENALTY_N2;
 		}
 		MPI_Ireduce(&result, &dott, 1, MPI_LONG, MPI_SUM, 0, MPI_COMM_WORLD, &request);
-		MPI_Wait(&request, MPI_STATUS_IGNORE);
+		//MPI_Wait(&request, MPI_STATUS_IGNORE);
 		result = dott;
 	}
 	

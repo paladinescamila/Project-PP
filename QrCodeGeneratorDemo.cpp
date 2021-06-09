@@ -60,7 +60,7 @@ int main(int argc, char** argv) {
 
 	MPI_Finalize();
 
-	// printf("N: %d, Tiempo: %f\n", N, end - start);
+	printf("N: %d, Tiempo: %f\n", N, end - start);
 
 	return EXIT_SUCCESS;
 }
@@ -82,9 +82,10 @@ static void doBasicDemo(int n) {
 	// Make and print the QR Code symbol
 	// const QrCode qr = QrCode::encodeText("algo", errCorLvl);
 	const QrCode qr = QrCode::encodeText(text, errCorLvl);
+	//const QrCode qr = QrCode::encodeText("eterno resplandor de una mente sin recuerdos by jim carrey, Es doloroso pasar tanto tiempo con alguien, solo para descubrir, que es un desconocido", errCorLvl);
 	// printQr(qr);
-	std::cout << qr.toSvgString(4) << std::endl;
-	// qr.toSvgString(4);
+	//std::cout << qr.toSvgString(4) << std::endl;
+	qr.toSvgString(4);
 	free(text);
 }
 
