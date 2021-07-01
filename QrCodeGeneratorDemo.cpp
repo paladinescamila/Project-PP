@@ -86,7 +86,7 @@ static void doBasicDemo(int n) {
 	// printQr(qr);
 	//std::cout << qr.toSvgString(4) << std::endl;
 	qr.toSvgString(4);
-	free(text);
+	// free(text);
 }
 
 
